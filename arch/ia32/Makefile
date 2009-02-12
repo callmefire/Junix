@@ -1,6 +1,7 @@
 DIR = boot
 BOOT_OBJECTS = boot.o 
 BOOT_OBJECTS += video.o
+BOOT_OBJECTS += cpu.o
 
 TARGET = build_in.o
 

@@ -26,7 +26,7 @@ void cls(void)
 void putchar(int c)
 {
     if (c == '\n' || c == '\r') {
-      newline:
+newline:
 	xpos = 0;
 	ypos++;
 	if (ypos >= LINES)

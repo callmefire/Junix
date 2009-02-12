@@ -38,4 +38,10 @@ void itoa(char *buf, int base, int d)
     }
 }
 
-
+void *memset(void *s, int c, unsigned int count)
+{
+	char *xs = s;
+	while (count--)
+		*xs++ = c;
+	return s;
+}
