@@ -77,9 +77,7 @@ int get_mbi(unsigned long magic, unsigned long addr)
 
 void main(unsigned long magic, unsigned long addr)
 {
-
-    /* Clear the screen.  */
-    cls();
+	video_init();
 
     printf("Junix(0.1)\n");
 
@@ -87,6 +85,11 @@ void main(unsigned long magic, unsigned long addr)
 		return;
     
 	get_cpu_type();
+
+	while (1) {
+		int i;
+		printf("%d",i++ % 10);
+	}
 }
 
 

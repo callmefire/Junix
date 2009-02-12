@@ -45,3 +45,16 @@ void *memset(void *s, int c, unsigned int count)
 		*xs++ = c;
 	return s;
 }
+
+void *memmove(void *dest, const void *src, unsigned int n)
+{
+	unsigned int i;
+	char *d = (char *)dest;
+	char *s = (char *)src;
+
+	for (i=0; i<n; i++) {
+		d[i] = s[i];
+	}
+
+	return (void *)dest;
+}
