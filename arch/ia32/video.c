@@ -42,25 +42,27 @@ static void set_bgcolor(char color)
 
 void scroll(void)
 {
+	int i;
 	memmove((void *)video,(void *)(video + COLUMNS * 2), (LINES - 1) * COLUMNS *2);
-	memset((void *)(video + (LINES - 1) * COLUMNS * 2), 0, COLUMNS * 2);	
+	
+	for (i = (LINES - 1) * COLUMNS * 2; i < LINES * COLUMNS * 2; i+=2 )
+		video[i] = ' ';
 }
 
 /* Put the character C on the screen.  */
 void putchar(int c)
 {
     if (c == '\n' || c == '\r') {
-
 newline:
 
-	xpos = 0;
-	ypos++;
+		xpos = 0;
+		ypos++;
 	
-	if (ypos >= LINES) {
-	    scroll();
-		ypos--;
-	}
-	return;
+		if (ypos >= LINES) {
+	    	scroll();
+			ypos--;
+		}
+		return;
     }
 
     *(video + (xpos + ypos * COLUMNS) * 2) = c & 0xFF;
