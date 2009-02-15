@@ -48,13 +48,27 @@ void *memset(void *s, int c, unsigned int count)
 
 void *memmove(void *dest, const void *src, unsigned int n)
 {
-	unsigned int i;
 	char *d = (char *)dest;
 	char *s = (char *)src;
 
-	for (i=0; i<n; i++) {
-		d[i] = s[i];
-	}
+	if (d <= s) {
+		while (n--)
+			*d++ = *s++;
+	} else {
+		while (n--)
+			d[n-1] = s[n-1];
+	}	
 
-	return (void *)dest;
+	return dest;
+}
+
+void *memcpy(void *dest, const void *src, unsigned int n)
+{
+	char *d = (char *)dest;
+	char *s = (char *)src;
+
+	while (n--) 
+		*d++ = *s++;
+	
+	return dest;
 }
