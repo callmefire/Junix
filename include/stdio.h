@@ -3,6 +3,6 @@
 
 #include <asm/stdio.h>
 
-extern void printf(const char *format, ...);
+extern void printk(const char *format, ...);
 
 #endif

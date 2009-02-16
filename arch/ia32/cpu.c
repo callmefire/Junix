@@ -256,139 +256,139 @@ void show_cache_type(unsigned char idx)
 
 		case CPUID_CACHE_TYPE_ITLB:
 		
-			printf("ITLB for 4K or 4M Page, ");
+			printk("ITLB for 4K or 4M Page, ");
 			if (get_ways(idx))
-				printf("%d-ways associative, ",get_ways(idx));
+				printk("%d-ways associative, ",get_ways(idx));
 			
 			if (get_entries(idx))
-				printf("%d entries",get_entries(idx));
+				printk("%d entries",get_entries(idx));
 			
-			printf("\n");
+			printk("\n");
 			break;
 		case CPUID_CACHE_TYPE_ITLB4K:
 			
-			printf("ITLB for 4K Page, ");
+			printk("ITLB for 4K Page, ");
 			if (get_ways(idx))
-				printf("%d-ways associative ",get_ways(idx));
+				printk("%d-ways associative ",get_ways(idx));
 			
 			if (get_entries(idx))
-				printf("%d entries",get_entries(idx));
+				printk("%d entries",get_entries(idx));
 			
-			printf("\n");
+			printk("\n");
 			break;
 		case CPUID_CACHE_TYPE_ITLB4M:
-			printf("ITLB for 4M Page, ");
+			printk("ITLB for 4M Page, ");
 			if (get_ways(idx))
-				printf("%d-ways associative ",get_ways(idx));
+				printk("%d-ways associative ",get_ways(idx));
 			
 			if (get_entries(idx))
-				printf("%d entries",get_entries(idx));
+				printk("%d entries",get_entries(idx));
 			
-			printf("\n");
+			printk("\n");
 			break;
 		case CPUID_CACHE_TYPE_DTLB:
 			
-			printf("DTLB for 4K or 4M Page, ");
+			printk("DTLB for 4K or 4M Page, ");
 			if (get_ways(idx))
-				printf("%d-ways associative ",get_ways(idx));
+				printk("%d-ways associative ",get_ways(idx));
 			
 			if (get_entries(idx))
-				printf("%d entries",get_entries(idx));
+				printk("%d entries",get_entries(idx));
 			
-			printf("\n");
+			printk("\n");
 			break;
 		case CPUID_CACHE_TYPE_DTLB4K:
 			
-			printf("DTLB for 4K Page, ");
+			printk("DTLB for 4K Page, ");
 			if (get_ways(idx))
-				printf("%d-ways associative ",get_ways(idx));
+				printk("%d-ways associative ",get_ways(idx));
 			
 			if (get_entries(idx))
-				printf("%d entries",get_entries(idx));
+				printk("%d entries",get_entries(idx));
 			
-			printf("\n");
+			printk("\n");
 			break;
 		case CPUID_CACHE_TYPE_DTLB4M:
 			
-			printf("DTLB for 4M Page, ");
+			printk("DTLB for 4M Page, ");
 			if (get_ways(idx))
-				printf("%d-ways associative ",get_ways(idx));
+				printk("%d-ways associative ",get_ways(idx));
 			
 			if (get_entries(idx))
-				printf("%d entries",get_entries(idx));
+				printk("%d entries",get_entries(idx));
 			
-			printf("\n");
+			printk("\n");
 			break;
 		case CPUID_CACHE_TYPE_IL1:
 			
-			printf("L1 ICache ");
+			printk("L1 ICache ");
 			if (get_size(idx))
-				printf("size %d KB ",get_size(idx));
+				printk("size %d KB ",get_size(idx));
 			
 			if (get_ways(idx))
-				printf("%d-ways associative ",get_ways(idx));
+				printk("%d-ways associative ",get_ways(idx));
 			
 			if (get_entries(idx))
-				printf("cacheline %d",get_entries(idx));
+				printk("cacheline %d",get_entries(idx));
 			
-			printf("\n");
+			printk("\n");
 			break;
 		case CPUID_CACHE_TYPE_DL1:
 			
-			printf("L1 DCache ");
+			printk("L1 DCache ");
 			if (get_size(idx))
-				printf("%d KB ",get_size(idx));
+				printk("%d KB ",get_size(idx));
 			
 			if (get_ways(idx))
-				printf("%d-ways associative ",get_ways(idx));
+				printk("%d-ways associative ",get_ways(idx));
 			
 			if (get_entries(idx))
-				printf("cacheline size %d",get_entries(idx));
+				printk("cacheline size %d",get_entries(idx));
 			
-			printf("\n");
+			printk("\n");
 			break;
 		case CPUID_CACHE_TYPE_L2:
-			printf("L2 Cache ");
+			printk("L2 Cache ");
 			if (get_size(idx))
-				printf(" %d KB ",get_size(idx));
+				printk(" %d KB ",get_size(idx));
 			
 			if (get_ways(idx))
-				printf("%d-ways associative ",get_ways(idx));
+				printk("%d-ways associative ",get_ways(idx));
 			
 			if (get_entries(idx))
-				printf("cacheline size %d",get_entries(idx));
+				printk("cacheline size %d",get_entries(idx));
 			
-			printf("\n");
+			printk("\n");
 			break;
 		case CPUID_CACHE_TYPE_L3:
 			
-			printf("L3 Cache ");
+			printk("L3 Cache ");
 			if (get_size(idx))
-				printf("%d KB ",get_size(idx));
+				printk("%d KB ",get_size(idx));
 			
 			if (get_ways(idx))
-				printf("%d-ways associative ",get_ways(idx));
+				printk("%d-ways associative ",get_ways(idx));
 			
 			if (get_entries(idx))
-				printf("cacheline size %d",get_entries(idx));
+				printk("cacheline size %d",get_entries(idx));
 			
-			printf("\n");
+			printk("\n");
 			break;
 		case CPUID_CACHE_TYPE_TC:
 			
-			printf("Trace Cache, ");
+			printk("Trace Cache, ");
 			if (get_size(idx))
-				printf("%d Kuops ",get_size(idx));
+				printk("%d Kuops ",get_size(idx));
 			
 			if (get_ways(idx))
-				printf("%d-ways associative",get_ways(idx));
+				printk("%d-ways associative",get_ways(idx));
 			
-			printf("\n");
+			printk("\n");
 			break;
 		case CPUID_CACHE_TYPE_PREFETCH:
 			
 			if (get_entries(idx))
-				printf("Prefetch size %d\n",get_entries(idx));
+				printk("Prefetch size %d\n",get_entries(idx));
 			
 			break;
 
@@ -478,23 +478,23 @@ void get_cpu_info(cpuid_info_t *cpu_info)
 	unsigned int signature = 0;
 	
 	get_vender(cpu_info->vender);
-	printf("%s  ",cpu_info->vender);
+	printk("%s  ",cpu_info->vender);
 
 	signature = get_signature();	
 
 	if ( (signature & PROCESSOR_TYPE_MASK) == PROCESSOR_TYPE_OEM)
-		printf("OEM Processor  ");
+		printk("OEM Processor  ");
 	else if ( (signature & PROCESSOR_TYPE_MASK) == PROCESSOR_TYPE_OVERDIRVE)
-		printf("Overdirve Processor  ");
+		printk("Overdirve Processor  ");
 	else if ( (signature & PROCESSOR_TYPE_MASK) == PROCESSOR_TYPE_DUAL)
-		printf("Dual Processor  ");
+		printk("Dual Processor  ");
 	else 	
-		printf("Reserved Type  ");
+		printk("Reserved Type  ");
 
 	cpu_info->family = (signature & PROCESSOR_FAMILY_MASK) >> 8;
 	cpu_info->model  = (signature & PROCESSOR_MODEL_MASK) >> 4;
 	cpu_info->stepping = (signature & PROCESSOR_STEPPING_MASK);
-	printf("Family %d   Model %d  Stepping %d\n"
+	printk("Family %d   Model %d  Stepping %d\n"
 			, cpu_info->family , cpu_info->model , cpu_info->stepping);
 
 	get_cpu_cache(cpu_info);
@@ -515,7 +515,7 @@ void get_cpu_type(void)
 
 	memset(&cpu_info,0,sizeof(cpu_info));
 	
-	printf("CPU Supports CPUID:\n");
+	printk("CPU Supports CPUID:\n");
 
 	get_cpu_info(&cpu_info);
 	get_cpu_ext_info(&cpu_info);

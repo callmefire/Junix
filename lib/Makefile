@@ -1,5 +1,5 @@
 DIR = lib 
-LIB_OBJECTS = string.o printf.o 
+LIB_OBJECTS = string.o printk.o 
 TARGET = build_in.o
 
 $(TARGET): $(LIB_OBJECTS)

@@ -112,7 +112,7 @@ multiboot_entry:
 	call	EXT_C(main)
 
 	pushl	$halt_message
-	call	EXT_C(printf)
+	call	EXT_C(printk)
 	
 loop:	hlt
 	jmp	loop
