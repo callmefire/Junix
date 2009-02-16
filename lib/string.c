@@ -72,3 +72,19 @@ void *memcpy(void *dest, const void *src, unsigned int n)
 	
 	return dest;
 }
+
+int memcmp(const void *s1,const void *s2,unsigned int n)
+{
+	char *t1 = (char *)s1;
+	char *t2 = (char *)t2;
+
+	while (n--) {
+		if (*t1 != *t2) {
+			return (int)(*t1 - *t2);
+		}
+		t1++;
+		t2++;
+	}
+
+	return 0;
+}
