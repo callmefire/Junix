@@ -87,9 +87,9 @@ void main(unsigned long magic, unsigned long addr)
 	get_cpu_type();
 
 	while (1) {
-		int i;
-		printk("%d\n",i++);
+		;
 	}
+
 }
 
 

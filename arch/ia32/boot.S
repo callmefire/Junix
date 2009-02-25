@@ -55,7 +55,6 @@ multiboot_entry:
 
 	pushl %eax
 	pushl %ecx
-	pushl %edx
 	pushl %edi
 
 	movl $(pg0 - PAGE_OFFSET), %edi
@@ -64,13 +63,14 @@ multiboot_entry:
 
 	/* 1st pde: 0-4M */
 	leal 0x007(%edi),%ecx
-	movl %ecx, (%edx)			/* map 0 - 1M region with the same phy page(pg0) */
-	movl %ecx, KERNEL_PDE_OFFSET(%edx)
+	movl %ecx, (%edx)					/* map 0 - 4M region with the same phy page(pg0) */
+	movl %ecx, KERNEL_PDE_OFFSET(%edx)	/* map 0xC0000000 - 0xC0100000 */
 	movl $1024,%ecx
 1:
 	stosl
 	addl $0x1000, %eax
-	loop 1b
+	decl %ecx							/* Use dec/jnz instaed of loop */
+	jnz 1b
 
 	/* 2nd pde: 4-8M */
 	leal 0x007(%edi),%ecx	
@@ -80,10 +80,10 @@ multiboot_entry:
 2:	
 	stosl
 	addl $0x1000, %eax
-	loop 2b
+	decl %ecx							/* Use dec/jnz instead of loop */
+	jnz 2b
 
 	popl %edi
-	popl %edx
 	popl %ecx
 	popl %eax
 
@@ -121,22 +121,23 @@ halt_message:
 	.asciz	"Halted."
 
 .data
-	.align 4
-boot_gdt_descr:
-	/* 8(Bytes) * 3(entry) = 24 */
-        .word 0x18
-        .long boot_gdt - PAGE_OFFSET
+
+	/* Kernel stack */
+	.align 0x1000
+	.comm	init_stack, INIT_STACK_SIZE
 
 	/* Align 8 is enough. Here wants higher performance on SMP */
 	.align L1_CACHE_BYTES
 boot_gdt:
- 	.quad 0x0000000000000000	/* NULL Segment */
-        .quad 0x00cf9a000000ffff        /* kernel 4GB code at 0x00000000 */
-        .quad 0x00cf92000000ffff        /* kernel 4GB data at 0x00000000 */	
+ 	.quad 0x0000000000000000		/* NULL Segment */
+    .quad 0x00cf9a000000ffff        /* kernel 4GB code at 0x00000000 */
+    .quad 0x00cf92000000ffff        /* kernel 4GB data at 0x00000000 */	
 
-	.align 0x1000
-	/* Our stack area.  */
-	.comm	init_stack, INIT_STACK_SIZE
+	/* 8(Bytes) * 3(entry) = 24 */
+	.align 4
+boot_gdt_descr:
+    .word 0x18
+	.long boot_gdt - PAGE_OFFSET
 
 .bss
 	.align 0x1000
