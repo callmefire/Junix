@@ -24,6 +24,7 @@ CC = $(CROSS_COMPILE)gcc
 LD = $(CROSS_COMPILE)ld
 AS = $(CROSS_COMPILE)as
 AR = $(CROSS_COMPILE)ar
+NM = $(CROSS_COMPILE)nm
 CP = cp
 RM = rm
 MAKE = make
@@ -38,7 +39,7 @@ LDFLAGS_SUFFIX = --end-group
 
 LD_SCRIPT = $(TOPDIR)/Junix.lds
 
-export CC LD AS AR RM MAKE
+export CC LD AS AR NM RM MAKE
 export CFLAGS CCAFLAGS LDFLAGS LDFLAGS_SUFFIX
 
 IMAGE = $(TOPDIR)/$(OS)
@@ -61,7 +62,8 @@ TAGS += cscope.out
 all: $(IMAGE) install
 
 $(IMAGE): build $(OBJECTS)
-	@$(LD) -o $@ $(LDFLAGS) $(OBJECTS) $(LDFLAGS_SUFFIX) 
+	@$(LD) -o $@ $(LDFLAGS) $(OBJECTS) $(LDFLAGS_SUFFIX)
+	@$(NM) $(IMAGE) | sort > $(IMAGE_MAP)	
 	@echo "LD $@"
 
 build:
@@ -78,7 +80,7 @@ build:
 
 install: $(IMAGE)
 	@$(CP) -f $(IMAGE) $(INSTALL_DIR)
-	@echo "INSTALL $<"
+	@echo "INSTALL $< --> $(INSTALL_DIR)"
 
 tags:
 	@ctags -R
@@ -92,7 +94,7 @@ clean:
 	@$(MAKE) -C $(INITDIR) clean
 	@$(MAKE) -C $(LIBDIR) clean
 	@$(RM) -rf  $(IMAGE) $(IMAGE_MAP)
-	@$(RM) -rf `find . -name *~`
+	@$(RM) -rf `find * -name '*~'`
 
 cleanall: clean
 	@$(RM) -f $(TAGS)

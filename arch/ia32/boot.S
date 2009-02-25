@@ -8,9 +8,8 @@
 #define BOOT_DS	 0x10
 
 .text
-.globl	start, _start
+.globl	_start
 
-start:
 _start:
 	/* For Grub, we can use it's GDT to do a long jmp.
 	 * But to be compliant with other bootloader, setup own GDT.
@@ -18,10 +17,10 @@ _start:
 	cld
 	lgdt boot_gdt_descr - PAGE_OFFSET
 	movl $(BOOT_DS),%edx
-        movl %edx,%ds
-        movl %edx,%es
-        movl %edx,%fs
-        movl %edx,%gs 
+    movl %edx,%ds
+    movl %edx,%es
+    movl %edx,%fs
+    movl %edx,%gs 
 	ljmp	$(BOOT_CS), $multiboot_entry - PAGE_OFFSET
 	
 	/* Align 32 bits boundary.  */
@@ -122,10 +121,6 @@ halt_message:
 
 .data
 
-	/* Kernel stack */
-	.align 0x1000
-	.comm	init_stack, INIT_STACK_SIZE
-
 	/* Align 8 is enough. Here wants higher performance on SMP */
 	.align L1_CACHE_BYTES
 boot_gdt:
@@ -141,7 +136,12 @@ boot_gdt_descr:
 
 .bss
 	.align 0x1000
+.global swapper_pg_dir
 swapper_pg_dir:
 	.fill	1024,4,0
+
+	/* Kernel stack */
+	.align 0x1000
+	.comm	init_stack, INIT_STACK_SIZE
 
 	
