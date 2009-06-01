@@ -50,6 +50,10 @@ OBJECTS = $(ARCHDIR)/$(ARCH)/$(TARGET)
 OBJECTS += $(INITDIR)/$(TARGET)
 OBJECTS += $(LIBDIR)/$(TARGET)
 
+SUBDIRS = $(ARCHDIR)/$(ARCH)
+SUBDIRS += $(INITDIR)
+SUBDIRS += $(LIBDIR)
+
 export OBJECTS
 
 ############# Local definations ##################
@@ -67,9 +71,7 @@ $(IMAGE): build $(OBJECTS)
 	@echo "LD $@"
 
 build:
-	@$(MAKE) -s -C $(ARCHDIR)/$(ARCH)/
-	@$(MAKE) -s -C $(INITDIR)
-	@$(MAKE) -s -C $(LIBDIR)
+	@$(foreach dir,$(SUBDIRS),$(MAKE) -s -C $(dir);)
 
 .S.o:
 	@$(CC) $(CCAFLAGS) -c $<
@@ -80,7 +82,7 @@ build:
 
 install: $(IMAGE)
 	@$(CP) -f $(IMAGE) $(INSTALL_DIR)
-	@echo "INSTALL $< --> $(INSTALL_DIR)"
+	@echo "INSTALL $< --> $(INSTALL_DIR)/"
 
 tags:
 	@ctags -R
@@ -90,9 +92,7 @@ tags:
 	@echo "Done."
 
 clean:
-	@$(MAKE) -C $(ARCHDIR)/$(ARCH) clean
-	@$(MAKE) -C $(INITDIR) clean
-	@$(MAKE) -C $(LIBDIR) clean
+	@$(foreach dir,$(SUBDIRS),$(MAKE) -C $(dir) clean;)
 	@$(RM) -rf  $(IMAGE) $(IMAGE_MAP)
 	@$(RM) -rf `find * -name '*~'`
 
