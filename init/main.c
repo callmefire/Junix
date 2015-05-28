@@ -15,8 +15,8 @@ int get_mbi(unsigned long magic, unsigned long addr)
 
     /* Check Multiboot Magic  */
     if (magic != MULTIBOOT_BOOTLOADER_MAGIC) {
-	printk("Invalid magic number: 0x%x\n", (unsigned) magic);
-	return 1;
+	    printk("Invalid magic number: 0x%x\n", (unsigned) magic);
+	    return 1;
     }
     
     /* Set MBI to the address of the Multiboot information structure.  */
@@ -27,7 +27,7 @@ int get_mbi(unsigned long magic, unsigned long addr)
     /* Are mem_* valid?  */
     if (CHECK_FLAG(mbi->flags, 0))
 		printk("    Lower memory: %uKB,  Upper memory: %uKB\n",
-	       (unsigned) mbi->mem_lower, (unsigned) mbi->mem_upper);
+	          (unsigned) mbi->mem_lower, (unsigned) mbi->mem_upper);
 
     /* Is boot_device valid?  */
     if (CHECK_FLAG(mbi->flags, 1))
